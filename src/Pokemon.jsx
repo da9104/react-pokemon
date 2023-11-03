@@ -1,16 +1,18 @@
-const Pokemon = ({ pokemon }) => {
+const Pokemon = ({ pokemon, types }) => {
  
      return (
         <div className="flex flex-col justify-center items-center">
           <div className="text-center underline">
             {pokemon.name}    
           </div>
-           {pokemon.sprites ? (
+            {pokemon.sprites ? (
             <img src={pokemon.sprites.front_default} alt={pokemon.name} />
             ) : (null)
            }
 
-          {pokemon.id}
+          {types.join(', ')}
+
+          {/* {pokemon.types.} */}
            
           {!isNaN(pokemon) ? '' : (
                 <>

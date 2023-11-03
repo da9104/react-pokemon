@@ -12,7 +12,7 @@ function App() {
   const [term, setTerm] = useState(num1)
   const [error, setError] = useState(null)
   const searchQueryRef = useRef()
-
+  const [types, setTypes] = useState([]);
 
 
   useEffect(() => {
@@ -23,7 +23,11 @@ function App() {
     setLoading(true)
     try {
       let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${term}`)
-      console.log(response.data[0])
+      const typesData = response.data.types;
+      const typeNames = typesData.map((type) => type.type.name);
+      console.log(typeNames)
+      setTypes(typeNames);
+     //  console.log(response.data)
       setResults(response.data)
     } catch (err) {
       console.log(err)
@@ -54,7 +58,7 @@ function App() {
     <hr />
     {error && <div className='text-red-700 font-extrabold'> {error.message} </div>}
     {loading ? (<div className='text-blue-700 font-extrabold'> Loading... </div>)
-     : ( <Pokemon pokemon={results}/> )
+     : ( <Pokemon pokemon={results} types={types} /> )
     }
     </>
   )
