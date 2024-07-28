@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import './App.css'
-import api from './api'
 import Pokemon from './Pokemon'
+import './App.css'
 
 const num1 = Math.floor(Math.random() * 100) +1;
 
@@ -25,9 +24,9 @@ function App() {
       let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${term}`)
       const typesData = response.data.types;
       const typeNames = typesData.map((type) => type.type.name);
+      console.log(response.data)
       console.log(typeNames)
       setTypes(typeNames);
-     //  console.log(response.data)
       setResults(response.data)
     } catch (err) {
       console.log(err)
